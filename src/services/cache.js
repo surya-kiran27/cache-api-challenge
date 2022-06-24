@@ -55,5 +55,20 @@ async function getEntry(key) {
   }
 }
 
+async function deleteAllEntries() {
+  try {
+    return cacheDB.deleteAllEntries();
+  } catch (error) {
+    throw error;
+  }
+}
 
-module.exports = { getAllEntries, getEntry };
+async function deleteEntryByKey(key) {
+  try {
+    return cacheDB.deleteEntryByKey(key);
+  } catch (error) {
+    throw error;
+  }
+}
+
+module.exports = { getAllEntries, getEntry, deleteAllEntries, deleteEntryByKey };

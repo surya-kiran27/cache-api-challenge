@@ -6,6 +6,10 @@ const cacheController = require('../../controllers/cache');
 
 router.get('/', cacheController.getAllEntries);
 
+router.delete('/', cacheController.deleteAllEntries);
+
 router.get('/:key', cacheController.getEntry);
+
+router.delete('/:key', cacheController.deleteEntry);
 
 module.exports = router;

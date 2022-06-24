@@ -60,6 +60,22 @@ async function deleteOldestEntry() {
   }
 }
 
+async function deleteAllEntries() {
+  try {
+    return CacheEntry.deleteMany({});
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function deleteEntryByKey(key) {
+  try {
+    return CacheEntry.findOneAndDelete({ key });
+  } catch (error) {
+    throw error;
+  }
+}
+
 module.exports = {
   getAllEntries,
   getEntry,
@@ -67,5 +83,7 @@ module.exports = {
   updateEntryByKey,
   deleteEntryById,
   getEntriesCount,
-  deleteOldestEntry
+  deleteOldestEntry,
+  deleteAllEntries,
+  deleteEntryByKey
 };
