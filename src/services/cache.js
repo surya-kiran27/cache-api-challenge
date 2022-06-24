@@ -9,7 +9,7 @@ async function createEntry({ key, value }) {
   // check if cache is full
   const totalEntries = await cacheDB.getEntriesCount();
   if (totalEntries >= process.env.MAX_CACHE_ENTRIES) {
-    console.log('cache overflow');
+    console.log('Cache overflow');
     // cache overflow
     // delete oldest entry
     await cacheDB.deleteOldestEntry();
@@ -43,7 +43,7 @@ async function getEntry(key) {
       }
     }
     // reset TTL on cache hit/read
-    return cacheDB.updateEntryByKey(key, { expiresAt: getExpiresAt() });
+    return cacheDB.updateEntryByKey(key, { expiresAt: getExpiresAt() }, { new: true });
   }
   console.log('Cache miss');
   const randomString = uuidv4();
@@ -71,4 +71,12 @@ async function deleteEntryByKey(key) {
   }
 }
 
-module.exports = { getAllEntries, getEntry, deleteAllEntries, deleteEntryByKey };
+async function updateEntryByKey(key, value) {
+  try {
+    return cacheDB.updateEntryByKey(key, { value }, { new: true, upsert: true });
+  } catch (error) {
+    throw error;
+  }
+}
+
+module.exports = { getAllEntries, getEntry, deleteAllEntries, deleteEntryByKey, updateEntryByKey };

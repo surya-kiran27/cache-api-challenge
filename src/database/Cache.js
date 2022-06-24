@@ -28,9 +28,9 @@ async function createEntry(entry) {
   }
 }
 
-async function updateEntryByKey(key, updateObj) {
+async function updateEntryByKey(key, updateObj, optionsObj) {
   try {
-    return await CacheEntry.findOneAndUpdate({ key }, { $set: { ...updateObj } }, { new: true });
+    return await CacheEntry.findOneAndUpdate({ key }, { $set: { ...updateObj } }, optionsObj);
   } catch (error) {
     throw error;
   }

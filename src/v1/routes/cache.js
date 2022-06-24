@@ -10,6 +10,8 @@ router.delete('/', cacheController.deleteAllEntries);
 
 router.get('/:key', cacheController.getEntry);
 
+router.patch('/:key', cacheController.updateEntry);
+
 router.delete('/:key', cacheController.deleteEntry);
 
 module.exports = router;
