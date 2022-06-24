@@ -6,6 +6,14 @@ const checkIfEntryExpired = require('../utils/checkIfEntryExpired');
 const getExpiresAt = require('../utils/getExpiresAt');
 
 async function createEntry({ key, value }) {
+  // check if cache is full
+  const totalEntries = await cacheDB.getEntriesCount();
+  if (totalEntries >= process.env.MAX_CACHE_ENTRIES) {
+    console.log('cache overflow');
+    // cache overflow
+    // delete oldest entry
+    await cacheDB.deleteOldestEntry();
+  }
   return cacheDB.createEntry({ key, value });
 }
 

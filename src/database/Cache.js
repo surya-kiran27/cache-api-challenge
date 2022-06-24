@@ -52,6 +52,13 @@ async function getEntriesCount() {
   }
 }
 
+async function deleteOldestEntry() {
+  try {
+    return CacheEntry.findOneAndDelete({}, { sort: { createdAt: 1 } });
+  } catch (error) {
+    throw error;
+  }
+}
 
 module.exports = {
   getAllEntries,
@@ -59,5 +66,6 @@ module.exports = {
   createEntry,
   updateEntryByKey,
   deleteEntryById,
-  getEntriesCount
+  getEntriesCount,
+  deleteOldestEntry
 };
