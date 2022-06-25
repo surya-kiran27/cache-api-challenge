@@ -2,9 +2,10 @@
 
 ## SETUP
 
-1. Create `local.env` file in env folder.
+1. Create `env` folder in root folder
+2. Create `local.env` file in env folder.
 
-Example
+Example .local.env
 ```
 DATABASE_URI=mongodb://localhost:27017/test
 MAX_CACHE_ENTRIES=10
