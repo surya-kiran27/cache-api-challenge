@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-catch */
 // external dependencies
 const { v4: uuidv4 } = require('uuid');
 // internal dependencies
@@ -73,10 +74,16 @@ async function deleteEntryByKey(key) {
 
 async function updateEntryByKey(key, value) {
   try {
-    return cacheDB.updateEntryByKey(key, { value }, { new: true, upsert: true });
+    return cacheDB.updateEntryByKey(
+      key,
+      { value, expiresAt: getExpiresAt() },
+      { new: true, upsert: true }
+    );
   } catch (error) {
     throw error;
   }
 }
 
-module.exports = { getAllEntries, getEntry, deleteAllEntries, deleteEntryByKey, updateEntryByKey };
+module.exports = {
+  getAllEntries, getEntry, deleteAllEntries, deleteEntryByKey, updateEntryByKey
+};

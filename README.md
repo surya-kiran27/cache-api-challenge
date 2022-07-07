@@ -5,7 +5,7 @@
 1. Create `env` folder in root folder
 2. Create `local.env` file in env folder.
 
-Example .local.env
+Example local.env
 ```
 DATABASE_URI=mongodb://localhost:27017/test
 MAX_CACHE_ENTRIES=10
@@ -41,6 +41,7 @@ npm start
 ```
 
 - `ERROR codes`
+   - 201 - Content created
    - 200 - All OK
    - 400 - Invalid request
    - 500 - Internal Server Error
@@ -76,7 +77,7 @@ npm start
 
 ## Additional information
 
-1) When the cache is full, entries are deleted in LIFO(Last in first out) manner
+1) When the cache is full, entries are deleted in FIFO(First in first out) manner
 
 2) Cache's TTL is reset after every read/hit
 

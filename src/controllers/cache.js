@@ -1,6 +1,5 @@
 const cacheService = require('../services/cache');
 
-
 async function getAllEntries(req, res) {
   try {
     const entries = await cacheService.getAllEntries();
@@ -30,10 +29,10 @@ async function getEntry(req, res) {
 async function updateEntry(req, res) {
   const key = Object(req.params.key);
   const value = Object(req.body.value);
-  if (!key) {
+  if (!key || !key.length > 0) {
     return res.status(400).json({ status: false, message: 'key is required in params' });
   }
-  if (!value) {
+  if (!value || !value.length > 0) {
     return res.status(400).json({ status: false, message: 'Value is required in request body' });
   }
   try {
@@ -45,7 +44,6 @@ async function updateEntry(req, res) {
       .json({ status: false, message: 'Error updating entry,try again later' });
   }
 }
-
 
 async function deleteEntry(req, res) {
   const key = Object(req.params.key);
@@ -77,5 +75,6 @@ async function deleteAllEntries(req, res) {
   }
 }
 
-
-module.exports = { getAllEntries, getEntry, deleteEntry, deleteAllEntries, updateEntry };
+module.exports = {
+  getAllEntries, getEntry, deleteEntry, deleteAllEntries, updateEntry
+};

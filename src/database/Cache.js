@@ -1,9 +1,14 @@
+/* eslint-disable no-useless-catch */
 // db models
 const CacheEntry = require('../models/CacheEntry');
 
 async function getAllEntries() {
   try {
-    const allEntries = await CacheEntry.find({}, {}, { lean: true });
+    const allEntries = await CacheEntry.find(
+      { expiresAt: { $gt: new Date() } },
+      {},
+      { lean: true }
+    );
     return allEntries;
   } catch (error) {
     throw error;

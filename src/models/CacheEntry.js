@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 
 const getExpiresAt = require('../utils/getExpiresAt');
 
-const Schema = mongoose.Schema;
+const { Schema } = mongoose;
 
 const CacheEntrySchema = new Schema(
   {
